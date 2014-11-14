@@ -10,9 +10,7 @@ var uglify = require('gulp-uglify');
 var paths = {
   sass: ['./src/css/sass/**/*.scss'],
   js: [
-    './src/js/app.js',
-    './src/js/controllers.js',
-    './src/js/services.js'
+    './src/js/app.js'
   ],
   moveFiles: [
     './src/fonts/*.*',
