@@ -2,96 +2,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <title>Top 5's Best Albums 2013</title>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js'></script>
+    <title>Top 5's Best Albums 2013</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.19/angular.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
   </head>
   <body ng-controller="AppControl">
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>Current Top 5's Best Albums 2013</h1>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="large-5 columns">
-        <p>Enter your top 10 best albums of the past year.</p>
-        <p>Directions:</p>
-        <ul>
-          <li>Rank your top 10 favorite albums of 2013</li>
-          <li><em>The score will be calculated automatically based on rank (Thanks Shahan)</em></li>
-          <li>Enter each album one at a time in the form below</li>
-          <li>Write in your name, band name, album name, and its rank for that album</li>
-          <li>Click "Vote"</li>
-          <li>Keep track of what you voted for</li>
-        </ul>
-        <input type="text" ng-model="userName" placeholder="Your Name">
-        <input type="text" ng-model="bandName" placeholder="Band Name">
-        <input type="text" ng-model="albumName" placeholder="Album Name">
-        <div class="row collapse">
-          <div class="small-9 columns">
-            <input type="number" name="input" ng-model="userScore" min="1" max="10" placeholder="Rank">
-          </div>
-          <div class="small-3 columns">
-            <button class="postfix" ng-click="addAlbum($event)">VOTE!</button>
-          </div>
-        </div>
-        <p><small>v0.6.5 - View on <a href="https://github.com/andrewlaskey/top5-albums" title="Top 5 Albums on Github">Github</a></small></p>
-      </div>
-
-      <div class="large-7 columns">
-        <table id="messagesDiv">
-          <tr>
-            <th>Band</th>
-            <th>Album</th>
-            <th>Score</th>
-            <th>Who Like</th>
-          </tr>
-          <tr ng-repeat="album in albums | orderBy:'score':true">
-            <td>{{album.bandName}}</td>
-            <td>{{album.albumName}}</td>
-            <td>{{album.score}}</td>
-            <td>{{album.listnames}}</td>
-          </tr>
-        </table>
-      </div>
-
-    </div>
     
-    <script>
-      function contains( haystack, needle ) {
-         for (i in haystack) {
-             if (haystack[i].albumName == needle) return i;
-         }
-         return -1;
-      }
+    <h1>Current Top 5's Best Albums 2013</h1>
 
-      var app = angular.module("top5app", ["firebase"]);
-      function MyController($scope, angularFire) {
-        var ref = new Firebase("https://top5.firebaseIO.com/");
-        $scope.albums = [];
-        angularFire(ref, $scope, "albums");
-        $scope.addAlbum = function(e) {
+    <ol>
+    <li ng-repeat="submission in submissions"><span>{{submission.bandName}}</span> – <span>{{submission.albumName}}</li>
+    </ol>
+    <p>{{ submissions | json }}</p>
 
-          var index = contains($scope.albums, $scope.albumName);
-          if ( index >= 0) {
-            $scope.albums[index].score += (11 - $scope.userScore);
-            $scope.albums[index].listnames += ', ' + $scope.userName;
-          } else {
-            $scope.albums.push({
-              bandName: $scope.bandName,
-              albumName: $scope.albumName,
-              score: (11 - $scope.userScore),
-              listnames: $scope.userName
-            });  
-          }
-          
-          $scope.bandName = "";
-          $scope.albumName = "";
-          $scope.userScore = "";
-        };
-      }
-    </script>
+    <input type="text" ng-model="bandName" placeholder="Band Name">
+    <input type="text" ng-model="albumName" placeholder="Album Name">
+    <button  ng-click="addAlbum($event)">Add</button>
+    
+    <script src="js/scripts.js"></script>
   </body>
 </html>
