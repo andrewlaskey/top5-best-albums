@@ -10,6 +10,9 @@ var uglify = require('gulp-uglify');
 var paths = {
   sass: ['./src/css/sass/**/*.scss'],
   js: [
+    './bower_components/hammerjs/hammer.js',
+    './bower_components/angular-hammer/angular-hammer.js',
+    './bower_components/ngRepeatReorder/dist/ngRepeatReorder.js',
     './src/js/app.js'
   ],
   moveFiles: [

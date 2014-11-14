@@ -10,7 +10,20 @@ var app = angular.module('top5app', ['firebase']);
 app.controller('AppControl', ['$scope', '$firebase',
   function($scope, $firebase) {
 
-    $scope.submissions = [];
+    $scope.submissions = [
+      {
+        bandName:'1st',
+        albumName: 'Row'
+      },
+      {
+        bandName:'2nd',
+        albumName: 'Row'
+      },
+      {
+        bandName:'3rd',
+        albumName: 'row'
+      }
+    ];
 
     $scope.addAlbum = function(e) {
 
