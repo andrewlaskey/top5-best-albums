@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="css/app.min.css" type="text/css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.19/angular.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/g/jquery@1,jquery.ui@1.10%28jquery.ui.core.min.js+jquery.ui.widget.min.js+jquery.ui.mouse.min.js+jquery.ui.sortable.min.js%29,angularjs@1.2,angular.ui-sortable"></script>
     <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
   </head>
@@ -14,8 +14,8 @@
     
     <h1>Current Top 5's Best Albums 2013</h1>
 
-    <ol class="list">
-      <li ng-repeat="submission in submissions"><span>{{submission.bandName}}</span> – <span>{{submission.albumName}}</span></li>
+    <ol class="list" ui-sortable ng-model="submissions">
+      <li ng-repeat="submission in submissions"><span>{{submission.bandName}}</span> – <span>{{submission.albumName}}</span> <button type="button" ng-click="deleteItem($index)">Delete</button></li>
     </ol>
     <p>{{ submissions | json }}</p>
 

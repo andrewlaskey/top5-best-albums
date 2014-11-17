@@ -5,7 +5,7 @@ function contains( haystack, needle ) {
    return -1;
 }
 
-var app = angular.module('top5app', ['firebase']);
+var app = angular.module('top5app', ['ui.sortable','firebase']);
 
 app.controller('AppControl', ['$scope', '$firebase',
   function($scope, $firebase) {
@@ -27,7 +27,7 @@ app.controller('AppControl', ['$scope', '$firebase',
 
     $scope.addAlbum = function(e) {
 
-      if ( $scope.submissions.length <= 10 ) {
+      if ( $scope.submissions.length < 10 ) {
         if ( contains($scope.submissions, $scope.albumName) < 0 ) {
           $scope.submissions.push({
             bandName: $scope.bandName,
@@ -38,6 +38,10 @@ app.controller('AppControl', ['$scope', '$firebase',
 
       $scope.bandName = "";
       $scope.albumName = "";
+    };
+
+    $scope.deleteItem = function(i) {
+      $scope.submissions.splice(i, 1);
     };
   }
 ]);
