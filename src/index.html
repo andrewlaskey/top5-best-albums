@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Top 5's Best Albums 2013</title>
+    <title>Top 5's Best Albums 2014</title>
 
     <link rel="stylesheet" href="css/app.min.css" type="text/css">
 
@@ -12,7 +12,7 @@
   </head>
   <body ng-controller="AppControl">
     
-    <h1>Current Top 5's Best Albums 2013</h1>
+    <h1>Current Top 5's Best Albums 2014</h1>
 
     <ol class="list" ui-sortable ng-model="submissions">
       <li ng-repeat="submission in submissions"><span>{{submission.bandName}}</span> – <span>{{submission.albumName}}</span> <button type="button" ng-click="deleteItem($index)">Delete</button></li>
