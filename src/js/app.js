@@ -25,6 +25,8 @@ app.controller('AppControl', ['$scope', '$firebase',
       }
     ];
 
+    $scope.topList = [];
+
     $scope.addAlbum = function(e) {
 
       if ( $scope.submissions.length < 10 ) {

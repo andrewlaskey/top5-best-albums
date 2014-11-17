@@ -14,19 +14,36 @@
     
     <h1>Current Top 5's Best Albums 2014</h1>
 
-    <ol class="list" ui-sortable ng-model="submissions">
-      <li ng-repeat="submission in submissions"><span>{{submission.bandName}}</span> – <span>{{submission.albumName}}</span> <button type="button" ng-click="deleteItem($index)">Delete</button></li>
-    </ol>
-    <p>{{ submissions | json }}</p>
-    
-    <div class="add-album" ng-show="submissions.length < 10">
-      <input type="text" ng-model="bandName" placeholder="Band Name">
-      <input type="text" ng-model="albumName" placeholder="Album Name">
-      <button type="button" ng-click="addAlbum($event)">Add</button>
+    <div class="voting-form">
+      <ol class="list" ui-sortable ng-model="submissions">
+        <li ng-repeat="submission in submissions"><span>{{submission.bandName}}</span> – <span>{{submission.albumName}}</span> <button type="button" ng-click="deleteItem($index)">Delete</button></li>
+      </ol>
+      <p>{{ submissions | json }}</p>
+      
+      <div class="add-album" ng-show="submissions.length < 10">
+        <input type="text" ng-model="bandName" placeholder="Band Name">
+        <input type="text" ng-model="albumName" placeholder="Album Name">
+        <button type="button" ng-click="addAlbum($event)">Add</button>
+      </div>
+      <div class="submit-albums" ng-show="submissions.length == 10">
+        <input type="text" ng-model="userName" placeholder="Your Name">
+        <button type="button" ng-click="submitAlbums()">Submit</button>
+      </div>
     </div>
-    <div class="submit-albums" ng-show="submissions.length == 10">
-      <input type="text" ng-model="userName" placeholder="Your Name">
-      <button type="button" ng-click="submitAlbums()">Submit</button>
+
+    <div class="top-10-list">
+      <table>
+        <th>
+          <td>Score</td>
+          <td>Band Name</td>
+          <td>Album Name</td>
+        </th>
+        <tr ng-repeat="album in topList">
+          <td>{{ album.score }}</td>
+          <td>{{ album.bandName }}</td>
+          <td>{{ album.alumbName }}</td>
+        </tr>
+      </table>
     </div>
     
     <script src="js/scripts.js"></script>
