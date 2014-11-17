@@ -10,6 +10,11 @@ var app = angular.module('top5app', ['ui.sortable','firebase']);
 app.controller('AppControl', ['$scope', '$firebase',
   function($scope, $firebase) {
 
+    var ref = new Firebase("https://top52014test.firebaseIO.com/");
+    var sync = $firebase(ref.child('years').child('2014'));
+
+    $scope.topList = sync.$asArray();
+
     $scope.submissions = [
       {
         bandName:'1st',
@@ -24,8 +29,6 @@ app.controller('AppControl', ['$scope', '$firebase',
         albumName: 'row'
       }
     ];
-
-    $scope.topList = [];
 
     $scope.addAlbum = function(e) {
 

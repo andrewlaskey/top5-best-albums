@@ -21,8 +21,8 @@
       <p>{{ submissions | json }}</p>
       
       <div class="add-album" ng-show="submissions.length < 10">
-        <input type="text" ng-model="bandName" placeholder="Band Name">
-        <input type="text" ng-model="albumName" placeholder="Album Name">
+        <input type="text" ng-model="bandname" placeholder="Band Name">
+        <input type="text" ng-model="albumname" placeholder="Album Name">
         <button type="button" ng-click="addAlbum($event)">Add</button>
       </div>
       <div class="submit-albums" ng-show="submissions.length == 10">
@@ -33,16 +33,20 @@
 
     <div class="top-10-list">
       <table>
-        <th>
-          <td>Score</td>
-          <td>Band Name</td>
-          <td>Album Name</td>
-        </th>
-        <tr ng-repeat="album in topList">
-          <td>{{ album.score }}</td>
-          <td>{{ album.bandName }}</td>
-          <td>{{ album.alumbName }}</td>
-        </tr>
+        <thead>
+          <tr>
+            <td>Score</td>
+            <td>Band Name</td>
+            <td>Album Name</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="album in topList">
+            <td>{{ album.score }}</td>
+            <td>{{ album.bandname }}</td>
+            <td>{{ album.albumname }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     
