@@ -5,10 +5,10 @@ function contains( haystack, needle ) {
    return -1;
 }
 
-var app = angular.module('top5app', ['ui.sortable','firebase']);
+var app = angular.module('top5app', ['ui.sortable','firebase','spotify']);
 
-app.controller('AppControl', ['$scope', '$firebase',
-  function($scope, $firebase) {
+app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
+  function($scope, $firebase, Spotify) {
 
     var ref = new Firebase("https://top52014test.firebaseIO.com/");
     var sync = $firebase(ref.child('years').child('2014'));
@@ -81,6 +81,12 @@ app.controller('AppControl', ['$scope', '$firebase',
       }
 
       $scope.submissions = [];
+    };
+
+    $scope.testSpotify = function() {
+      Spotify.search('Nirvana', 'artist').then(function (data) {
+        console.log(data);
+      });
     };
   }
 ]);
