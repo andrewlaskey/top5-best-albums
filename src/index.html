@@ -36,10 +36,11 @@
 
     <div class="wrapper">
       <div class="voting-form">
+        <h4>Vote</h4>
+        <p>Add your top 10 favorite albums from the past year.</p>
         <ol class="list" ui-sortable ng-model="submissions">
-          <li ng-repeat="submission in submissions"><span>{{submission.bandname}}</span> – <span>{{submission.albumname}}</span> <button type="button" ng-click="deleteItem($index)">Delete</button></li>
+          <li ng-repeat="submission in submissions"><strong>{{submission.bandname}}</strong> – <em>{{submission.albumname}}</em> <button class="button--close" type="button" ng-click="deleteItem($index)"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></button></li>
         </ol>
-        <p>{{ submissions | json }}</p>
         
         <div class="add-album" ng-show="submissions.length < 10">
           <input type="text" ng-model="bandname" placeholder="Band Name">
@@ -53,6 +54,8 @@
       </div>
 
       <div class="top-10-list">
+        <h4>The Results</h4>
+        <p>Scores are updated live. No need to refresh.</p>
         <table>
           <thead>
             <tr>

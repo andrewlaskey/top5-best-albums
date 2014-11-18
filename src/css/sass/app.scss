@@ -3,9 +3,23 @@
 @import "neat/neat";
 @import "base/base";
 
+@mixin hfa {
+	&:hover,
+	&:focus,
+	&:active {
+	  @content;
+	}
+}
 
 .wrapper {
 	@include outer-container;
+	padding-left: 2rem;
+	padding-right: 2rem;
+
+	@include media($large-screen) {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 .voting-form {
@@ -19,10 +33,48 @@
 		@include span-columns(6);
 		@include omega();
 	}
+
+	table {
+		margin-top: 0;
+	}
 }
 
 .site-header {
 	padding-top: 1em;
 	padding-bottom: 2em;
 	text-align: center;
+}
+
+.icon {
+	display: inline-block;
+	fill: currentColor;
+	height: 1em;
+	width: 1em;
+}
+
+button.button--close {
+	padding: 0.25em 0.5em;
+	background: $error-color;
+
+	@include hfa {
+		background: darken($error-color, 8%);
+	}
+}
+
+.list {
+
+	li {
+		@include clearfix;
+		border-bottom: $base-border;
+		padding: ($base-spacing / 2) 0;
+		cursor: move;
+
+		&.ui-sortable-helper {
+			background: rgba($base-background-color, 0.75);
+		}
+
+		.button--close {
+			float: right;
+		}
+	}
 }

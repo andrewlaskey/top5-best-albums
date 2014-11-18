@@ -180,8 +180,10 @@ ul, ol {
 
 ol {
   list-style-type: decimal;
-  margin-bottom: 0.75em;
-  padding-left: 1.5em; }
+  list-style-position: inside;
+  margin-bottom: 0.75em; }
+  ol li {
+    padding-left: 1.5em; }
 
 dl {
   margin-bottom: 0.75em; }
@@ -209,11 +211,17 @@ button, input[type="submit"] {
 .wrapper {
   max-width: 68em;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem; }
   .wrapper:after {
     content: "";
     display: table;
     clear: both; }
+  @media screen and (min-width: 53.75em) {
+    .wrapper {
+      padding-left: 0;
+      padding-right: 0; } }
 
 @media screen and (min-width: 53.75em) {
   .voting-form {
@@ -233,8 +241,35 @@ button, input[type="submit"] {
     margin-right: 0; }
     .top-10-list:last-child {
       margin-right: 0; } }
+.top-10-list table {
+  margin-top: 0; }
 
 .site-header {
   padding-top: 1em;
   padding-bottom: 2em;
   text-align: center; }
+
+.icon {
+  display: inline-block;
+  fill: currentColor;
+  height: 1em;
+  width: 1em; }
+
+button.button--close {
+  padding: 0.25em 0.5em;
+  background: #e75a60; }
+  button.button--close:hover, button.button--close:focus, button.button--close:active {
+    background: #e2363f; }
+
+.list li {
+  border-bottom: 1px solid #DDD;
+  padding: 0.75em 0;
+  cursor: move; }
+  .list li:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .list li.ui-sortable-helper {
+    background: rgba(255, 255, 255, 0.75); }
+  .list li .button--close {
+    float: right; }
