@@ -10,6 +10,7 @@ var svgSprites = require('gulp-svg-sprites');
 
 var paths = {
   sass: ['./src/css/sass/**/*.scss'],
+  img: './src/images/',
   svg: './src/images/svg/',
   js: [
     './bower_components/hammerjs/hammer.js',
@@ -55,7 +56,7 @@ gulp.task('sprites', function() {
               defs: true,
               className: '.svg-%f-icon'
             }))
-            .pipe(gulp.dest(paths.svg));
+            .pipe(gulp.dest(paths.img));
 });
 
 gulp.task('reload', function() {
