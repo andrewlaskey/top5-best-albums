@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/app.min.css" type="text/css">
 
     <script src="http://cdn.jsdelivr.net/g/jquery@1,jquery.ui@1.10%28jquery.ui.core.min.js+jquery.ui.widget.min.js+jquery.ui.mouse.min.js+jquery.ui.sortable.min.js%29,angularjs@1.2,angular.ui-sortable"></script>
-    <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
   </head>
   <body ng-controller="AppControl">
@@ -16,7 +16,7 @@
 
     <div class="voting-form">
       <ol class="list" ui-sortable ng-model="submissions">
-        <li ng-repeat="submission in submissions"><span>{{submission.bandName}}</span> – <span>{{submission.albumName}}</span> <button type="button" ng-click="deleteItem($index)">Delete</button></li>
+        <li ng-repeat="submission in submissions"><span>{{submission.bandname}}</span> – <span>{{submission.albumname}}</span> <button type="button" ng-click="deleteItem($index)">Delete</button></li>
       </ol>
       <p>{{ submissions | json }}</p>
       
@@ -41,13 +41,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="album in topList">
+          <tr ng-repeat="album in albumList | orderBy:'score':true">
             <td>{{ album.score }}</td>
             <td>{{ album.bandname }}</td>
             <td>{{ album.albumname }}</td>
           </tr>
         </tbody>
       </table>
+      <p>{{ topList | json }}</p>
     </div>
     
     <script src="js/scripts.js"></script>
