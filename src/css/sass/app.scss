@@ -1,4 +1,28 @@
-@import "bourbon";
+@import "bourbon/bourbon";
 @import "base/grid-settings";
-@import "neat";
+@import "neat/neat";
 @import "base/base";
+
+
+.wrapper {
+	@include outer-container;
+}
+
+.voting-form {
+	@include media($large-screen) {
+		@include span-columns(6);
+	}
+}
+
+.top-10-list {
+	@include media($large-screen) {
+		@include span-columns(6);
+		@include omega();
+	}
+}
+
+.site-header {
+	padding-top: 1em;
+	padding-bottom: 2em;
+	text-align: center;
+}
