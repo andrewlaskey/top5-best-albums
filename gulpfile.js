@@ -6,9 +6,11 @@ var rename = require('gulp-rename');
 var connect = require('gulp-connect');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
+var svgSprites = require('gulp-svg-sprites');
 
 var paths = {
   sass: ['./src/css/sass/**/*.scss'],
+  svg: './src/images/svg/',
   js: [
     './bower_components/hammerjs/hammer.js',
     './bower_components/angular-hammer/angular-hammer.js',
@@ -45,6 +47,15 @@ gulp.task('scripts', function() {
     .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
     .pipe(gulp.dest('./src/js/build/'));
+});
+
+gulp.task('sprites', function() {
+  return gulp.src(paths.svg + '*.svg')
+            .pipe(svg({
+              defs: true,
+              className: '.svg-%f-icon'
+            }))
+            .pipe(gulp.dest(paths.svg));
 });
 
 gulp.task('reload', function() {
