@@ -298,6 +298,7 @@ button.button--close {
     height: 100%; }
 
 .album__band {
+  margin-bottom: 0.5em;
   font-weight: normal; }
 
 .details li {
