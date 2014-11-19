@@ -13,9 +13,7 @@ var paths = {
   img: './src/images/',
   svg: './src/images/svg/',
   js: [
-    './bower_components/hammerjs/hammer.js',
-    './bower_components/angular-hammer/angular-hammer.js',
-    './bower_components/ngRepeatReorder/dist/ngRepeatReorder.js',
+    './bower_components/angular-spotify/src/angular-spotify.js',
     './src/js/app.js'
   ],
   moveFiles: [
