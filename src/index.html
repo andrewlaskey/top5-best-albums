@@ -56,25 +56,24 @@
       <div class="top-10-list">
         <h4>The Results</h4>
         <p>Scores are updated live. No need to refresh.</p>
-        <table>
-          <thead>
-            <tr>
-              <td>Score</td>
-              <td>Band Name</td>
-              <td>Album Name</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="album in albumList | orderBy:'score':true">
-              <td>{{ album.score }}</td>
-              <td>{{ album.bandname }}</td>
-              <td>{{ album.spotifyID }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <ul class="result-list">
+          <li class="album" ng-repeat="album in albumList | orderBy:'score':true">
+            <div class="album__art">
+              <img  ng-src="{{ album.spotifyImage }}">
+            </div>
+            <div class="album__info">
+              <h4>{{ album.albumname }}</h4>
+              <h5 class="album__band">{{ album.bandname }}</h5>
+              <ul class="details">
+                <li>{{ album.score }} points</li>
+                <li>{{ album.votes.length }} votes</li>
+                <li><a ng-href="https://open.spotify.com/album/{{ album.spotifyID }}" title="Play on Spotify"><svg class="icon icon-play-arrow"><use xlink:href="#icon-play-arrow"></use></svg>Play</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
-    <button type="button" ng-click="testSpotify();">Test Spotify</button>
     
     <script src="js/scripts.js"></script>
   </body>

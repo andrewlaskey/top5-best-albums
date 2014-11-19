@@ -3,6 +3,10 @@
 @import "neat/neat";
 @import "base/base";
 
+* {
+	box-sizing: border-box;
+}
+
 @mixin hfa {
 	&:hover,
 	&:focus,
@@ -76,5 +80,42 @@ button.button--close {
 		.button--close {
 			float: right;
 		}
+	}
+}
+
+$album-size: 100px;
+
+.album {
+	display: block;
+	position: relative;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-left: em($album-size) + 1em;
+	height: em($album-size) + 1em;
+	border-bottom: $base-border;
+}
+
+.album__art {
+	position: absolute;
+	top: 0.5em;
+	left: 0;
+	width: $album-size;
+	height: $album-size;
+	background: $light-gray;
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.album__band {
+	font-weight: normal;
+}
+
+.details {
+	li {
+		display: inline-block;
+		margin-right: 1em;
 	}
 }
