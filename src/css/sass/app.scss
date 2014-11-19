@@ -29,6 +29,8 @@
 .voting-form {
 	@include media($large-screen) {
 		@include span-columns(6);
+		padding-left: 1rem;
+		padding-right: 2rem;
 	}
 }
 
@@ -36,6 +38,8 @@
 	@include media($large-screen) {
 		@include span-columns(6);
 		@include omega();
+		padding-left: 1rem;
+		padding-right: 2rem;
 	}
 
 	table {

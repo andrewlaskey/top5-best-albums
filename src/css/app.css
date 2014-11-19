@@ -231,7 +231,9 @@ button, input[type="submit"] {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 48.82117%; }
+    width: 48.82117%;
+    padding-left: 1rem;
+    padding-right: 2rem; }
     .voting-form:last-child {
       margin-right: 0; } }
 
@@ -241,7 +243,9 @@ button, input[type="submit"] {
     display: block;
     margin-right: 2.35765%;
     width: 48.82117%;
-    margin-right: 0; }
+    margin-right: 0;
+    padding-left: 1rem;
+    padding-right: 2rem; }
     .top-10-list:last-child {
       margin-right: 0; } }
 .top-10-list table {
