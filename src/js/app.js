@@ -67,10 +67,6 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
               });
             });
         } else {
-          console.log('i: ' + i);
-          console.log('index: ' + index);
-          console.log(albumList[index]);
-
           $scope.albumList[index].score += points;
           $scope.albumList[index].votes.push({
               user: $scope.userName,
