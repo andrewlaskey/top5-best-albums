@@ -208,6 +208,9 @@ button, input[type="submit"] {
   vertical-align: middle;
   white-space: nowrap; }
 
+* {
+  box-sizing: border-box; }
+
 .wrapper {
   max-width: 68em;
   margin-left: auto;
@@ -273,3 +276,31 @@ button.button--close {
     background: rgba(255, 255, 255, 0.75); }
   .list li .button--close {
     float: right; }
+
+.album {
+  display: block;
+  position: relative;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 7.25em;
+  height: 7.25em;
+  border-bottom: 1px solid #DDD; }
+
+.album__art {
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background: #DDD; }
+  .album__art img {
+    width: 100%;
+    height: 100%; }
+
+.album__band {
+  margin-bottom: 0.5em;
+  font-weight: normal; }
+
+.details li {
+  display: inline-block;
+  margin-right: 1em; }

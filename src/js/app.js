@@ -5,31 +5,18 @@ function contains( haystack, needle ) {
    return -1;
 }
 
-var app = angular.module('top5app', ['ui.sortable','firebase']);
+var app = angular.module('top5app', ['ui.sortable','firebase','spotify']);
 
-app.controller('AppControl', ['$scope', '$firebase',
-  function($scope, $firebase) {
+app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
+  function($scope, $firebase, Spotify) {
 
     var ref = new Firebase("https://top52014test.firebaseIO.com/");
     var sync = $firebase(ref.child('years').child('2014'));
-    //var albumList = sync.$asArray();
 
     $scope.albumList = sync.$asArray();
 
-    $scope.submissions = [
-      {
-        bandname:'1st',
-        albumname: '1'
-      },
-      {
-        bandname:'2nd',
-        albumname: '2'
-      },
-      {
-        bandname:'3rd',
-        albumname: '3'
-      }
-    ];
+
+    $scope.submissions = [];
 
     $scope.addAlbum = function(e) {
 
@@ -57,20 +44,29 @@ app.controller('AppControl', ['$scope', '$firebase',
             index = contains($scope.albumList, sub.albumname);
 
         if ( index < 0 ) {
-          $scope.albumList.$add({
-            albumname: sub.albumname,
-            bandname: sub.bandname,
-            score: points,
-            votes: [{
-              user: $scope.userName,
-              points: points
-            }]
-          });
-        } else {
-          console.log('i: ' + i);
-          console.log('index: ' + index);
-          console.log($scope.albumList[index]);
+          $scope.albumList
+            .$add({
+              albumname: sub.albumname,
+              bandname: sub.bandname,
+              score: points,
+              votes: [{
+                user: $scope.userName,
+                points: points
+              }]
+            }).then(function(ref) {
+              var id = ref.key(),
+                index = $scope.albumList.$indexFor(id);
 
+
+              Spotify.search($scope.albumList[index].albumname, 'album', {limit: 1}).then(function (data) {
+                
+                $scope.albumList[index].spotifyID = data.albums.items[0].id;
+                $scope.albumList[index].spotifyImage = data.albums.items[0].images[1].url;
+
+                $scope.albumList.$save($scope.albumList[index]);
+              });
+            });
+        } else {
           $scope.albumList[index].score += points;
           $scope.albumList[index].votes.push({
               user: $scope.userName,
@@ -81,6 +77,12 @@ app.controller('AppControl', ['$scope', '$firebase',
       }
 
       $scope.submissions = [];
+    };
+
+    $scope.testSpotify = function() {
+      Spotify.search('Nirvana', 'artist').then(function (data) {
+        console.log(data);
+      });
     };
   }
 ]);
