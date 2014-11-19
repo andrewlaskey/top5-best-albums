@@ -14,6 +14,9 @@ var paths = {
   svg: './src/images/svg/',
   js: [
     './bower_components/angular-spotify/src/angular-spotify.js',
+    './bower_components/d3/d3.js',
+    './bower_components/nvd3/nv.d3.js',
+    './bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
     './src/js/app.js'
   ],
   moveFiles: [

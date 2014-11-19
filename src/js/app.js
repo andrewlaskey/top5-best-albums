@@ -5,7 +5,7 @@ function contains( haystack, needle ) {
    return -1;
 }
 
-var app = angular.module('top5app', ['ui.sortable','firebase','spotify']);
+var app = angular.module('top5app', ['ui.sortable','firebase','spotify','nvd3ChartDirectives']);
 
 app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
   function($scope, $firebase, Spotify) {

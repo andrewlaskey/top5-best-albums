@@ -1,3 +1,4 @@
+@import "components/nvd3";
 @import "bourbon/bourbon";
 @import "base/grid-settings";
 @import "neat/neat";
@@ -51,6 +52,10 @@
 	padding-top: 1em;
 	padding-bottom: 2em;
 	text-align: center;
+}
+
+.svg-icon-main {
+	display: none;
 }
 
 .icon {
