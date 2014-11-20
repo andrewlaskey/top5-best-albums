@@ -76,6 +76,7 @@
               </ul>
             </div>
             <div class="album__data" ng-show="showData">
+              <canvas tc-chartjs-bar chart-data="myData" chart-options="myOptions" width="480" height="115"></canvas>
               <h5>Who voted for this:</h5>
               <p><span ng-repeat="vote in album.votes">{{vote.user}}, </span></p>
             </div>
