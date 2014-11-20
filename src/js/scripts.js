@@ -30258,12 +30258,6 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
       $scope.submissions = [];
     };
 
-    $scope.testSpotify = function() {
-      Spotify.search('Nirvana', 'artist').then(function (data) {
-        console.log(data);
-      });
-    };
-
     $scope.findById = function(source, id) {
       return source.filter(function( obj ) {
           // coerce both obj.id and id to numbers 
