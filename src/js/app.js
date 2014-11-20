@@ -30,8 +30,6 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
         for (var i = 0; i < obj.length; i++) {
           if (typeof obj[i] == 'object') {
 
-            console.log(obj[i]);
-
             var newDataset = {
               labels: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th','9th', '10th'],
               datasets: [
