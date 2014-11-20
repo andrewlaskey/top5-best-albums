@@ -30258,35 +30258,6 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
       $scope.submissions = [];
     };
 
-    //Angularjs-nvd3-directives Functions
-    $scope.getBarChartData = function(data) {
-      var displayData = [
-        {
-          'key': 'Series 1',
-          'values' : [[1,0], [2,0], [3,0], [4,0], [5,0], [6, 0], [7, 0], [8, 0], [9, 0], [10, 0]]
-        }
-      ];
-
-      for (var i in data) {
-        var place = 11 - data[i].points;
-        displayData[0].values[place - 1][1] += 1;
-      }
-
-      return displayData;
-    };
-
-    $scope.yAxisTickFormatFunction = function(){
-        return function(d){
-            return d.toString();
-        }
-    }
-
-    $scope.colorFunction = function() {
-      return function(d, i) {
-        return '#477DCA';
-      };
-    }
-
     $scope.testSpotify = function() {
       Spotify.search('Nirvana', 'artist').then(function (data) {
         console.log(data);
