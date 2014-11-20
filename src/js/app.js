@@ -5,6 +5,8 @@ function contains( haystack, needle ) {
    return -1;
 }
 
+
+
 var app = angular.module('top5app', ['ui.sortable','firebase','spotify','nvd3ChartDirectives','tc.chartjs']);
 
 app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
@@ -15,34 +17,49 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
 
     $scope.albumList = sync.$asArray();
 
-
     $scope.submissions = [];
 
-    $scope.myData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          fillColor: 'rgba(220,220,220,0.5)',
-          strokeColor: 'rgba(220,220,220,0.8)',
-          highlightFill: 'rgba(220,220,220,0.75)',
-          highlightStroke: 'rgba(220,220,220,1)',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label: 'My Second dataset',
-          fillColor: 'rgba(151,187,205,0.5)',
-          strokeColor: 'rgba(151,187,205,0.8)',
-          highlightFill: 'rgba(151,187,205,0.75)',
-          highlightStroke: 'rgba(151,187,205,1)',
-          data: [28, 48, 40, 19, 86, 27, 90]
-        }
-      ]
-    };
+    $scope.barData = [];
 
     $scope.myOptions =  {
       // Chart.js options can go here.
     };
+
+    $scope.albumList.$loaded()
+      .then(function(obj) {
+        for (var i = 0; i < obj.length; i++) {
+          if (typeof obj[i] == 'object') {
+
+            console.log(obj[i]);
+
+            var newDataset = {
+              labels: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th','9th', '10th'],
+              datasets: [
+                {
+                  label: '',
+                  fillColor: 'rgba(220,220,220,0.5)',
+                  strokeColor: 'rgba(220,220,220,0.8)',
+                  highlightFill: 'rgba(220,220,220,0.75)',
+                  highlightStroke: 'rgba(220,220,220,1)',
+                  data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                }
+              ]
+            };
+
+            newDataset.datasets[0].label = 'Votes for ' + obj[i].albumname;
+
+            for (var k = obj[i].votes.length - 1; k >= 0; k--) {
+              var place = 11 - obj[i].votes[k].points;
+
+              newDataset.datasets[0].data[place - 1] += 1;
+            }
+
+            $scope.barData.push({id: obj[i].$id, bardata: newDataset});
+
+          }
+        }
+
+      });
 
     $scope.addAlbum = function(e) {
 
@@ -138,6 +155,14 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
       Spotify.search('Nirvana', 'artist').then(function (data) {
         console.log(data);
       });
+    };
+
+    $scope.findById = function(source, id) {
+      return source.filter(function( obj ) {
+          // coerce both obj.id and id to numbers 
+          // for val & type comparison
+          return obj.id === id;
+      })[ 0 ];
     };
   }
 ]);

@@ -75,8 +75,8 @@
                 <li><a href="#" title="Show data" ng-click="showData = ! showData"><svg class="icon icon-insert-chart"><use xlink:href="#icon-insert-chart"></use></svg>Show data</a></li>
               </ul>
             </div>
-            <div class="album__data" ng-show="showData">
-              <canvas tc-chartjs-bar chart-data="myData" chart-options="myOptions" width="480" height="115"></canvas>
+            <div class="album__data" ng-show="showData" ng-init="myData = findById(barData, album.$id)">
+              <canvas tc-chartjs-bar chart-data="myData.bardata" chart-options="myOptions" width="480" height="115" id="barchart-{{ $index }}"></canvas>
               <h5>Who voted for this:</h5>
               <p><span ng-repeat="vote in album.votes">{{vote.user}}, </span></p>
             </div>
