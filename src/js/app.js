@@ -24,44 +24,52 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
     $scope.myOptions =  {
       // Chart.js options can go here.
     };
+    
+    $scope.albumList.$watch(function(event) {
+      console.log(event);
 
-    $scope.albumList.$loaded()
-      .then(function(obj) {
-        for (var i = 0; i < obj.length; i++) {
-          if (typeof obj[i] == 'object') {
+      
+        var objIndex = $scope.albumList.$indexFor(event.key);
 
-            var newDataset = {
-              labels: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th','9th', '10th'],
-              datasets: [
-                {
-                  label: '',
-                  fillColor: 'rgba(220,220,220,0.5)',
-                  strokeColor: 'rgba(220,220,220,0.8)',
-                  highlightFill: 'rgba(220,220,220,0.75)',
-                  highlightStroke: 'rgba(220,220,220,1)',
-                  data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                }
-              ]
-            };
-
-            newDataset.datasets[0].label = 'Votes for ' + obj[i].albumname;
-
-            for (var k = obj[i].votes.length - 1; k >= 0; k--) {
-              var place = 11 - obj[i].votes[k].points;
-
-              newDataset.datasets[0].data[place - 1] += 1;
+        var newDataset = {
+          labels: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th','9th', '10th'],
+          datasets: [
+            {
+              label: '',
+              fillColor: 'rgba(220,220,220,0.5)',
+              strokeColor: 'rgba(220,220,220,0.8)',
+              highlightFill: 'rgba(220,220,220,0.75)',
+              highlightStroke: 'rgba(220,220,220,1)',
+              data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             }
+          ]
+        };
 
-            $scope.barData.push({id: obj[i].$id, bardata: newDataset});
+        newDataset.datasets[0].label = 'Votes for ' + $scope.albumList[objIndex].albumname;
 
+        for (var k = $scope.albumList[objIndex].votes.length - 1; k >= 0; k--) {
+          var place = 11 - $scope.albumList[objIndex].votes[k].points;
+
+          newDataset.datasets[0].data[place - 1] += 1;
+        }
+
+        if (event.event == 'child_changed') {
+
+          for (var i = $scope.barData.length - 1; i >= 0; i--) {
+            if ($scope.barData[i].id === event.key) {
+              $scope.barData[i].bardata = newDataset;
+            }
           }
         }
 
-      });
+        if (event.event == 'child_added') {
+          $scope.barData.push({id: event.key, bardata: newDataset});
+        }
+    });
 
     $scope.addAlbum = function(e) {
 
-      if ( $scope.submissions.length < 10 ) {
+      if ( $scope.submissions.length < 1 ) {
         if ( contains($scope.submissions, $scope.albumname) < 0 ) {
           $scope.submissions.push({
             bandname: $scope.bandname,

@@ -46,12 +46,12 @@
           <li ng-repeat="submission in submissions"><strong>{{submission.bandname}}</strong> – <em>{{submission.albumname}}</em> <button class="button--close" type="button" ng-click="deleteItem($index)"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></button></li>
         </ol>
         
-        <div class="add-album" ng-show="submissions.length < 10">
+        <div class="add-album" ng-show="submissions.length < 1">
           <input type="text" ng-model="bandname" placeholder="Band Name">
           <input type="text" ng-model="albumname" placeholder="Album Name">
           <button type="button" ng-click="addAlbum($event)">Add</button>
         </div>
-        <div class="submit-albums" ng-show="submissions.length == 10">
+        <div class="submit-albums" ng-show="submissions.length == 1">
           <input type="text" ng-model="userName" placeholder="Your Name">
           <button type="button" ng-click="submitAlbums()">Submit</button>
         </div>
