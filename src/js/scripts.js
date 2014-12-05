@@ -30157,11 +30157,9 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
 
     $scope.barData = [];
 
-    $scope.myOptions =  {
+    $scope.chartOptions =  {
       // Chart.js options can go here.
     };
-
-    //Chart.defaults.global.responsive = true;
     
     $scope.albumList.$watch(function(event) {
       console.log(event);
@@ -30207,7 +30205,7 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
 
     $scope.addAlbum = function(e) {
 
-      if ( $scope.submissions.length < 1 ) {
+      if ( $scope.submissions.length < 10 ) {
         if ( contains($scope.submissions, $scope.albumname) < 0 ) {
           $scope.submissions.push({
             bandname: $scope.bandname,

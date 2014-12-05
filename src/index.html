@@ -46,12 +46,12 @@
           <li ng-repeat="submission in submissions"><strong>{{submission.bandname}}</strong> – <em>{{submission.albumname}}</em> <button class="button--close" type="button" ng-click="deleteItem($index)"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></button></li>
         </ol>
         
-        <div class="add-album" ng-show="submissions.length < 1">
+        <div class="add-album" ng-show="submissions.length < 10">
           <input type="text" ng-model="bandname" placeholder="Band Name">
           <input type="text" ng-model="albumname" placeholder="Album Name">
           <button type="button" ng-click="addAlbum($event)">Add</button>
         </div>
-        <div class="submit-albums" ng-show="submissions.length == 1">
+        <div class="submit-albums" ng-show="submissions.length == 10">
           <input type="text" ng-model="userName" placeholder="Your Name">
           <button type="button" ng-click="submitAlbums()">Submit</button>
         </div>
@@ -75,8 +75,8 @@
                 <li><a href="#" title="Show data" ng-click="showData = ! showData"><svg class="icon icon-insert-chart"><use xlink:href="#icon-insert-chart"></use></svg>Show data</a></li>
               </ul>
             </div>
-            <div class="album__data" ng-show="showData" ng-init="myData = findById(barData, album.$id)">
-              <canvas tc-chartjs-bar chart-data="myData.bardata" chart-options="myOptions" width="480" height="115" id="barchart-{{ $index }}"></canvas>
+            <div class="album__data" ng-show="showData" ng-init="albumData = findById(barData, album.$id)">
+              <canvas tc-chartjs-bar chart-data="albumData.bardata" chart-options="chartOptions" width="480" height="115" id="barchart-{{ $index }}"></canvas>
               <h5>Who voted for this:</h5>
               <p><span ng-repeat="vote in album.votes">{{vote.user}}, </span></p>
             </div>
