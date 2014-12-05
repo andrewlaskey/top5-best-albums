@@ -27,7 +27,7 @@ var paths = {
     './src/views/*.*',
     './src/index.html',
     './src/js/build/scripts.min.js',
-    './src/css/style.min.css'
+    './src/css/app.min.css'
   ]
 };
 
