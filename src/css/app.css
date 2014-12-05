@@ -926,3 +926,6 @@ button.button--close {
 .album__data {
   padding-top: 1rem;
   font-size: 0.9em; }
+  .album__data canvas {
+    width: 100% !important;
+    max-width: 100%; }

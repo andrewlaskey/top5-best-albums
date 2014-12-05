@@ -137,4 +137,9 @@ $album-size: 100px;
 .album__data {
 	padding-top: 1rem;
 	font-size: 0.9em;
+
+	canvas {
+		width: 100% !important;
+		max-width: 100%;
+	}
 }

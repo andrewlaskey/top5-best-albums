@@ -30160,6 +30160,8 @@ app.controller('AppControl', ['$scope', '$firebase', 'Spotify',
     $scope.myOptions =  {
       // Chart.js options can go here.
     };
+
+    //Chart.defaults.global.responsive = true;
     
     $scope.albumList.$watch(function(event) {
       console.log(event);
