@@ -1,3 +1,4 @@
+@import "components/nvd3";
 @import "bourbon/bourbon";
 @import "base/grid-settings";
 @import "neat/neat";
@@ -53,6 +54,10 @@
 	text-align: center;
 }
 
+.svg-icon-main {
+	display: none;
+}
+
 .icon {
 	display: inline-block;
 	fill: currentColor;
@@ -94,8 +99,7 @@ $album-size: 100px;
 	position: relative;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	padding-left: em($album-size) + 1em;
-	height: em($album-size) + 1em;
+	//height: em($album-size) + 1em;
 	border-bottom: $base-border;
 }
 
@@ -113,6 +117,11 @@ $album-size: 100px;
 	}
 }
 
+.album__info {
+	padding-left: em($album-size) + 1em;
+	height: em($album-size);
+}
+
 .album__band {
 	margin-bottom: 0.5em;
 	font-weight: normal;
@@ -122,5 +131,15 @@ $album-size: 100px;
 	li {
 		display: inline-block;
 		margin-right: 1em;
+	}
+}
+
+.album__data {
+	padding-top: 1rem;
+	font-size: 0.9em;
+
+	canvas {
+		width: 100% !important;
+		max-width: 100%;
 	}
 }
