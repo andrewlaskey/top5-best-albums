@@ -72,7 +72,7 @@
                 <li>{{ album.score }} points</li>
                 <li>{{ album.votes.length }} votes</li>
                 <li><a ng-href="https://open.spotify.com/album/{{ album.spotifyID }}" title="Play on Spotify"><svg class="icon icon-play-arrow"><use xlink:href="#icon-play-arrow"></use></svg>Play</a></li>
-                <li><a href="#" title="Show data" ng-click="showData = ! showData"><svg class="icon icon-insert-chart"><use xlink:href="#icon-insert-chart"></use></svg>Show data</a></li>
+                <li><a title="Show data" ng-click="showData = ! showData"><svg class="icon icon-insert-chart"><use xlink:href="#icon-insert-chart"></use></svg>Show data</a></li>
               </ul>
             </div>
             <div class="album__data" ng-show="showData" ng-init="albumData = findById(barData, album.$id)">
