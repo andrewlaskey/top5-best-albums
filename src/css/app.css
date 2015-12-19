@@ -913,7 +913,7 @@ button.button--close {
 
 .album__info {
   padding-left: 7.25em;
-  height: 6.25em; }
+  min-height: 6.25em; }
 
 .album__band {
   margin-bottom: 0.5em;
@@ -929,3 +929,34 @@ button.button--close {
   .album__data canvas {
     width: 100% !important;
     max-width: 100%; }
+
+.user-list {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .user-list:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 53.75em) {
+    .user-list > li {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 48.82117%; }
+      .user-list > li:last-child {
+        margin-right: 0; }
+      .user-list > li:nth-child(2n) {
+        margin-right: 0; }
+      .user-list > li:nth-child(2n+1) {
+        clear: left; } }
+
+.album-list {
+  margin-left: 1em;
+  list-style-position: outside; }
+  .album-list > li {
+    padding-left: 0;
+    padding-bottom: 10px; }
+    .album-list > li img {
+      margin-right: 10px;
+      vertical-align: middle; }

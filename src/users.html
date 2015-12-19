@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top 5's Best Albums 2015 - User Lists</title>
+
+    <link rel="stylesheet" href="css/app.min.css" type="text/css">
+
+    <script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
+  </head>
+  <body>
+    <svg class="svg-icon-main" display="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <symbol id="icon-grade" viewBox="0 0 1024 1024">
+          <title>grade</title>
+          <path class="path1" d="M512 736.853l263.68 159.147-69.76-299.947 232.747-201.6-306.773-26.453-119.893-282.667-119.893 282.667-306.773 26.453 232.747 201.6-69.76 299.947z"></path>
+        </symbol>
+        <symbol id="icon-play-arrow" viewBox="0 0 1024 1024">
+          <title>play-arrow</title>
+          <path class="path1" d="M341.333 213.333v597.333l469.333-298.667z"></path>
+        </symbol>
+        <symbol id="icon-insert-chart" viewBox="0 0 1024 1024">
+          <title>insert-chart</title>
+          <path class="path1" d="M810.667 128h-597.333c-47.147 0-85.333 38.187-85.333 85.333v597.333c0 47.147 38.187 85.333 85.333 85.333h597.333c47.147 0 85.333-38.187 85.333-85.333v-597.333c0-47.147-38.187-85.333-85.333-85.333zM384 725.333h-85.333v-298.667h85.333v298.667zM554.667 725.333h-85.333v-426.667h85.333v426.667zM725.333 725.333h-85.333v-170.667h85.333v170.667z"></path>
+        </symbol>
+        <symbol id="icon-close" viewBox="0 0 1024 1024">
+          <title>close</title>
+          <path class="path1" d="M810.667 273.707l-60.373-60.373-238.293 238.293-238.293-238.293-60.373 60.373 238.293 238.293-238.293 238.293 60.373 60.373 238.293-238.293 238.293 238.293 60.373-60.373-238.293-238.293z"></path>
+        </symbol>
+        <symbol id="icon-menu" viewBox="0 0 1024 1024">
+          <title>menu</title>
+          <path class="path1" d="M128 768h768v-85.333h-768v85.333zM128 554.667h768v-85.333h-768v85.333zM128 256v85.333h768v-85.333h-768z"></path>
+        </symbol>
+      </defs>
+    </svg>
+    
+    <h1 class="site-header">2015 Individual Best Album Lists</h1>
+
+    <div class="wrapper">
+      <div id="app"></div>
+    </div>
+
+    <!-- React JS -->
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+
+
+    <script type="text/jsx">
+      
+      var AlbumList = React.createClass({
+        render: function () {
+          var createAlbum = function (album) {
+            return (
+              <li>
+                <img src={ album.art } width="50" height="50" />
+                <a href="https://open.spotify.com/album/{ album.spotifyId }" targe="_blank">{ album.artist } - { album.albumname }</a>
+              </li>
+            );
+          };
+
+          return (
+            <li>
+              <h4 className="user-list-title">{ this.props.user }</h4>
+              <ol className="album-list">{ this.props.list.map(createAlbum) }</ol>
+            </li>
+          );
+        }
+      });
+
+      var UserList = React.createClass({
+        getInitialState: function () {
+          return {
+            users: []
+          }
+        },
+
+        componentWillMount: function () {
+          this.firebaseref = new Firebase('https://top5albums.firebaseio.com/years/2015');
+
+          this.firebaseref.on('value', this.downloadData);
+        },
+
+        componentWillUnmount: function() {
+          this.firebaseRef.off();
+        },
+
+        downloadData: function (snapshot) {
+          var newusers = [];
+
+          // Loop through each album
+          snapshot.forEach(function (childSnap) {
+
+            var album = childSnap.val();
+
+            // Loop through each vote for this album
+            album.votes.forEach(function (vote) {
+              var foundUser = false,
+                  key = 0;
+
+              // Album data we are going to add to the user list
+              var data = {
+                albumname: album.albumname,
+                artist: album.bandname,
+                art: album.spotifyImage,
+                spotifyId: album.spotifyID
+              };
+
+              // Look for user to see if already exists
+              for (var i = newusers.length - 1; i >= 0; i--) {
+                if (newusers[i].username == vote.user) {
+                  foundUser = true;
+
+                  newusers[i].albums[10 - vote.points] = data;
+                }
+              }
+
+              if (!foundUser) {
+                // if user doesn't exist add to array
+                var albums = [];
+
+                albums[10 - vote.points] = data;
+
+                newusers.push({
+                  username: vote.user,
+                  albums: albums
+                });
+              }
+            });
+          });
+  
+          // Update state
+          this.setState({
+            users: newusers
+          });
+        },
+
+        render: function () {
+          var createAlbumList = function (user) {
+            return (
+              <AlbumList
+                key={ user.key }
+                user={ user.username }
+                list={ user.albums }
+              />
+            );
+          };
+
+          return (
+            <ul className="user-list">{ this.state.users.map(createAlbumList) }</ul>
+          );
+        }
+      });
+
+      React.render((<UserList></UserList>), document.getElementById('app'));
+    </script>
+    
+  </body>
+</html>

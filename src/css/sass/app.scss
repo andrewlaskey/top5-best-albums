@@ -119,7 +119,7 @@ $album-size: 100px;
 
 .album__info {
 	padding-left: em($album-size) + 1em;
-	height: em($album-size);
+	min-height: em($album-size);
 }
 
 .album__band {
@@ -141,5 +141,33 @@ $album-size: 100px;
 	canvas {
 		width: 100% !important;
 		max-width: 100%;
+	}
+}
+
+.user-list {
+	@include outer-container;
+
+	> li {
+
+		@include media($large-screen) {
+			@include span-columns(6);
+			@include omega(2n);	
+		}
+		
+	}
+}
+
+.album-list {
+	margin-left: 1em;
+	list-style-position: outside;
+
+	> li {
+		padding-left: 0;
+		padding-bottom: 10px;
+
+		img {
+			margin-right: 10px;
+			vertical-align: middle;
+		}
 	}
 }
